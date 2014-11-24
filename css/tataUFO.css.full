@@ -1,0 +1,412 @@
+body, button, input{
+	font-family:"Microsoft Yahei","微软雅黑",'Helvetica Neue',Helvetica,Arial,Sans-serif;
+	background-color: #fcdcc3;
+}
+input{
+	background-color: #FFF;
+	border: 1px #BBB solid;
+	padding: 3px 5px;
+}
+a img{
+	border: 0;
+}
+input.textfield{
+	border:none;
+	outline: none;
+	background-color: #FFF;
+	font-size: 16px;
+	padding: 6px 8px;
+	box-shadow: 0px 1px 1px rgba(102,102,102,0.4) inset;
+}
+.textarea{
+	border: 2px solid #fcdcc3;
+	outline: none;
+	background-color: #FFF;
+	font-size: 16px;
+	padding: 6px 8px;
+}
+.pink{
+	color:#ff9999;
+}
+.muddy{
+	color: #996c33;
+}
+.blue{
+	color: #63aade;
+}
+.red{
+	color: #F00;
+}
+.green{
+	color: #0F0;
+}
+.orange{
+	color: #996c33;
+}
+.radius15{
+	border-radius: 15px;
+}
+.radius5{
+	border-radius: 5px;
+}
+.radius3{
+	border-radius: 3px;
+}
+.button {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 3px rgba(51,51,51,.8) inset;
+	-moz-box-shadow: 0 1px 3px rgba(51,51,51,.8) inset;
+	box-shadow: 0 1px 1px rgba(51,51,51,.8);
+	padding: 6px 12px;
+}
+
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}
+.button.disabled:active{
+	top: 0;
+}
+.button_red {
+	color: #FFF;
+	border: solid 1px #cc0000;
+	background: #cc0000;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fe0000), to(#cc0000));
+	background: -moz-linear-gradient(top,  #fe0000,  #cc0000);
+}
+.button_pay_red {
+	color: #FFF;
+	border: solid 0px #cc0000;
+	background:#FF827F;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FF827F), to(#FF827F));
+	background: -moz-linear-gradient(top,  #FF827F,  #FF827F);
+}
+.button_red:hover {
+	background: #bb0000;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ec0000), to(#ba0000));
+	background: -moz-linear-gradient(top,  #ec0000,  #ba0000);
+}
+
+.button_grey {
+	color: #FFF;
+	border: solid 1px #999999;
+	background: #999999;
+	background: -webkit-gradient(linear, left top, left bottom, from(#bebebe), to(#999999));
+	background: -moz-linear-gradient(top,  #bebebe,  #999999);
+}
+
+.button_blue {
+	color: #FFF;
+	border: solid 1px #49a2cd;
+	background: #49a2cd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#5bc9fe), to(#49a2cc));
+	background: -moz-linear-gradient(top,  #5bc9fe,  #49a2cc);
+}
+.button_blue:hover {
+	background: #39b2bc;
+	background: -webkit-gradient(linear, left top, left bottom, from(#4bb9ee), to(#39b2bc));
+	background: -moz-linear-gradient(top,  #4bb9ee,  #39b2bc);
+}
+.button_orange{
+	color: #FFF;
+	border: solid 1px #ff9001;
+	background: #ff9001;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffbd67), to(#ff9001));
+	background: -moz-linear-gradient(top,  #ffbd67,  #ff9001);
+}
+.button_orange:hover {
+	background: #ef8000;
+	background: -webkit-gradient(linear, left top, left bottom, from(#efad57), to(#ef8000));
+	background: -moz-linear-gradient(top,  #efad57,  #ef8000);
+}
+.button_pink {
+	color: #DE877D;
+	text-shadow: 0 1px 1px rgba(255,255,255,.3);
+	border: solid 1px #fbd3b4;
+	background: #fbd3b4;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fcdcc4), to(#fbd3b4));
+	background: -moz-linear-gradient(top,  #fcdcc4,  #fbd3b4);
+}
+.button_pink:hover {
+	background: #eac3aa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#efccb0), to(#eac3aa));
+	background: -moz-linear-gradient(top,  #efccb0,  #eac3aa);
+}
+.button_pink2 {
+	color: #FFF;
+	text-shadow: 0 1px 1px rgba(255,255,255,.3);
+	border: solid 1px #fe6767;
+	background: #fe6767;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fe8686), to(#fe6767));
+	background: -moz-linear-gradient(top,  #fe8686,  #fe6767);
+}
+.button_pink2:hover {
+	background: #ee5757;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fe8686), to(#ee5757));
+	background: -moz-linear-gradient(top,  #fe8686,  #ee5757);
+}
+.button.button_large{
+	font-weight:36px;
+	padding: 15px 25px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.button.button_long{
+	padding: 6px 28px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.stylefaq{
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	height:30px;
+	cursor: pointer;
+	color: #996C33;
+	background-color: #fee4d0;
+	clear:both;
+}
+.qamark {
+	width: 26px;
+	height: 30px;
+	color: #656262;
+	font-size:30px;
+	float: left;
+ }
+.qatitle{
+	padding-top:8px;
+	padding-left:10px;
+	font-size:20px;
+	float: left;
+}
+.qaarrow{
+	float:right;
+	padding-right:10px;
+	background: url('http://tataufo.com/resources/images/qa_button_down.png') no-repeat;
+	width: 27px;
+	height: 27px;
+}
+.stylefaq1{
+	margin: 0px;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-bottom: 5px;
+	overflow:auto;
+	color: #996C33;
+	background-color: #fbe9db;
+}
+.qamark1 {
+	width: 26px;
+	height: 30px;
+	color: #929191;
+	font-size:30px;
+	float: left;
+ }
+ .qaanswer {
+    padding-top: 5px;
+	padding-left: 10px;
+	width: 800px;
+	overflow:auto;
+	float: left;
+}
+
+#followrenren{
+	position: absolute;
+	right: 76px;
+	top: 6px;
+	width: 76px;
+	height: 23px;
+}
+#followweibo{
+	position: absolute;
+	right: 9px;
+	top: 6px;
+	width: 63px;
+	height: 22px;
+}
+
+#footer{
+	font-size: 12px;
+	line-height: 32px;
+	text-align: center;
+	padding: 20px;
+	color: #996c33;
+}
+#footer_links a{
+	color: #996c33;
+}
+#footer_copyright{
+}
+
+#footer #footer_links{
+	font-size: 16px;
+}
+#undisplay{display:none}
+
+.friendinfo{
+	width:380px;
+	margin-left:5px;
+	padding:15px 20px 15px 20px;
+	border:5px solid #FFFFFF;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	background-color:#FFF4EC;
+	vertical-align: middle;
+	cursor: pointer;
+
+}
+.friendinfo_right{
+	width:270px;
+	margin-left:13px;
+	padding:10px 0px 15px 20px;
+	border:5px solid #FFFFFF;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	background-color:#FFF4EC;
+	word-wrap:break-word;
+	min-height:15px;
+}
+
+.chat_input{
+	width:500px;
+	margin-left:13px;
+	min-height:30px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	
+}
+
+
+/*
+.friendinfo span{
+	width:0;
+	height:0;
+	font-size:0;
+	overflow:hidden;
+	position:absolute;
+}
+*/
+.firstchatinfo{
+	font-size:14px;
+	color:#B6946C;
+	cursor:pointer;
+}
+.secondchatinfo {
+	text-align:right;
+	margin:15px -25px 0px 0px;
+	font-size:10px;
+	color:#AAA9A8;
+}
+.chatleftimg{
+	text-align:right;
+	width:20px;
+	height:20px;
+	float:left;
+	background-image:url(../images/chat_cloud_left.png);
+	background-color:transparent;
+	position:relative;
+	margin-left:-8px;
+
+}
+.chatfriendinfo{
+	width:260px;
+	margin-left:5px;
+	padding:15px 20px 15px 20px;
+	border:5px solid #FFFFFF;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	background-color:#FFF4EC;
+	word-wrap:break-word;
+
+}
+
+.chat_input_info{
+	height: auto;
+	width: 430px;
+	font-size: 16px;
+	padding: 0px 0px;
+	min-height:25px;
+	word-wrap:break-word;
+}
+.chatfriendavate{
+	 width:80px;
+	 height:80px;
+	 border:4px solid #ffffff;
+	  -moz-border-radius:50px;
+	 -webkit-border-radius:50px;
+	 border-radius:50px;
+	 background-color:#FFF4EC;
+	/* background-image:url(../images/13305.png);*/
+}
+
+span #offlinecount{
+ font-size:16px;
+}
+.chat .time {
+  float: left;
+  margin-left: 12px;
+  color: #aaa;
+  font-size: 11px;
+  padding-top:5px;
+}
+
+.chatingright .time{
+  float: right;
+  margin-left: 12px;
+  color: #aaa;
+  font-size: 11px;
+  padding-top:5px;
+}
+
+.zhubao{
+	float: right;
+	margin:4px 0px;
+	text-decoration:underline;
+	cursor: pointer;
+}
+#chat_faces #faces{
+	 background-color:#FFFFFF;
+	 width:430px;
+	 max-height:250px;
+	 display:none;
+	 overFlow-x:none;  
+	 overFlow-y:scroll;  
+}
+
+.emojiface{
+	height:30px;
+	width:30px;
+	margin:2px;
+}
+
+#faces_info{
+	padding-top:10px;
+}
+
+.avatar_img{
+    width:600px;
+    padding:10px 0px 0px 20px;
+    text-align: center;
+}
+.avatarsure{
+    padding: 10px 0px 10px 0px;
+}

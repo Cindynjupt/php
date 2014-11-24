@@ -1,0 +1,561 @@
+	/* Centered texts in each section 
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+	
+	
+	/* Backgrounds will cover all the section
+	* --------------------------------------- */
+	#section0{
+		background-size: cover;
+	}
+	#section1{
+		background-size: cover;
+	}
+	#section2{
+		background-size: cover;
+	}
+	#section3{
+		background-size: cover;
+	}
+	#section4{
+		background-size: cover;
+	}
+	
+	
+	
+	/* Defining each sectino background and styles 
+	* --------------------------------------- */
+	#section0{
+		background-image: url(../../resources/images/fronttop.png);
+		padding: 1 0 0 0;
+	}
+	#section2{
+		padding: 50px 0 0 0;
+	}
+	#section3{
+		padding: 17% 0 0 0;
+	}
+	#section4{
+		padding: 30px 0 0 0;
+	}
+
+ 
+ 	/*Adding background for the slides
+	* --------------------------------------- */
+	#slide1{
+		background-image: url(resources/images/slide2.png);
+		padding: 50px 0 0 0;
+		background: -webkit-gradient(linear, top left, bottom left, from(#d2f0ff), to(#86d6ff));
+		background: -webkit-linear-gradient(#d2f0ff, #86d6ff);
+		background: linear-gradient(#d2f0ff,#86d6ff);
+		z-index: 5;	
+		text-align: center;
+}
+	#slide2{
+		background-image: url(resources/images/slide3.png);
+		padding: 50px 0 0 0;
+		background: -webkit-gradient(linear, top left, bottom left, from(#d2f0ff), to(#86d6ff));
+		background: -webkit-linear-gradient(#d2f0ff, #86d6ff);
+		background: linear-gradient(#d2f0ff,#86d6ff);
+		z-index: 5;
+	}	
+	#slide3{
+		background-image: url(resources/images/slide4.png);
+		padding: 50px 0 0 0;
+		background: -webkit-gradient(linear, top left, bottom left, from(#d2f0ff), to(#86d6ff));
+		background: -webkit-linear-gradient(#d2f0ff, #86d6ff);
+		background: linear-gradient(#d2f0ff,#86d6ff);
+		z-index: 5;
+	}
+	#slide4{
+		background-image: url(resources/images/slide5.png);
+		padding: 50px 0 0 0;
+		background: -webkit-gradient(linear, top left, bottom left, from(#d2f0ff), to(#86d6ff));
+		background: -webkit-linear-gradient(#d2f0ff, #86d6ff);
+		background: linear-gradient(#d2f0ff,#86d6ff);
+		z-index: 5;
+	}	
+	#slide5{
+		background-image: url(resources/images/slide5.png);
+		padding: 50px 0 0 0;
+		background: -webkit-gradient(linear, top left, bottom left, from(#d2f0ff), to(#86d6ff));
+		background: -webkit-linear-gradient(#d2f0ff, #86d6ff);
+		background: linear-gradient(#d2f0ff,#86d6ff);
+	  	z-index: 5;
+	}
+	
+	/* Overwriting fullPage.js tooltip color
+	* --------------------------------------- */
+	.fullPage-tooltip{
+		color: #9fdefe;
+	}
+	#fullPage-nav span, .fullPage-slidesNav span{
+		border-color: #9fdefe;
+	}
+	#fullPage-nav li .active span, .fullPage-slidesNav .active span{
+		background: #9fdefe;
+	}
+#loginform{
+        background-color: #fff;
+        padding: 10px;
+}
+#loginform .field_label{
+        font-size: 14px;
+        vertical-align: middle;
+        text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7);
+        display: inline-block;
+        width: 30px;
+}
+#loginform .rem{
+        margin-right: 37px;
+}
+.checkremember{
+        margin-top: -2px;
+	width: 18px;
+	height: 18px;
+	background: transparent url(../../resources/images/rememberme.png ) no-repeat 0 50%
+}
+.rememberme_checked
+{
+   background: transparent url(../../resources/images/rememberme_checked.png ) no-repeat 80% 50%
+}
+
+
+/*For validation msg display*/
+.control-group .errorMsgBox{
+        display: none;
+}
+
+.error .errorMsgBox{
+        display: block;
+}
+
+#login {
+	position: absolute;
+	bottom: 18px;
+	margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+	}
+#loginsafe {
+        position: absolute;
+        top: 200px;
+        margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+        }
+#loginsimple {
+        position: absolute;
+        width: 762px;
+        bottom: 22%;
+        padding-right: 32px;
+        margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+        }
+#loginfresh {
+        position: absolute;
+        width: 762px;
+        top: 300px;
+	padding-left: 245px;
+        margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+        }
+#loginslide1bak {
+        position: absolute;
+        width: 703px;
+        top: 380px;
+	padding-left: 310px;
+	z-index: 10;
+        }
+#loginslide1 {
+	position: absolute;
+        width: 762px;
+        top: 380px;
+        margin-left: auto;
+	margin-right: auto;
+	z-index: 50;
+	display: inline-block;
+	text-align: left;
+        }
+
+#loginslide2 {
+        position: absolute;
+        width: 762px;
+        top: 380px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 50;
+        display: inline-block;
+        text-align: left;        
+}
+
+#loginslide3 {
+        position: absolute;
+        width: 762px;
+        top: 380px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 50;
+        display: inline-block;
+        text-align: left;        
+}
+
+#loginslide4 {
+        position: absolute;
+        width: 762px;
+        top: 380px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 50;
+        display: inline-block;
+        text-align: left;
+        }
+
+#loginslide5 {
+        position: absolute;
+        width: 762px;
+        top: 380px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 50;
+        display: inline-block;
+        text-align: left;
+        }
+#slidea {
+	position: relative;
+	z-index: 3;
+}
+#qr {
+        position: absolute;
+        width: 762px;
+        top: 480px;
+        margin-left: auto;
+margin-right: auto;
+        z-index: 50;
+        display: inline-block;
+        text-align: left;
+	padding-left: 4px;
+}
+
+#qr2 {
+        position: absolute;
+        width: 762px;
+        top: 480px;
+        margin-left: auto;
+margin-right: auto;
+        z-index: 50;
+        display: inline-block;
+        text-align: left;
+        padding-left: 4px;
+}
+#front_footer {
+position: relative;
+font-size: 12px;
+line-height: 20px;
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+padding: 25px;
+color: #676767;	
+bottom: 10px;
+display: inline-block;
+}
+.logininfobox {
+	margin-top:15px;
+	text-align:center;
+	}
+
+.field_label {
+	margin-right:15px;
+	font-size:10pt;
+}
+.textfield2 {
+	color:#d2d2d2;
+	border: solid 1px #4dc3ff;
+	border-radius: 0;
+	width:220px;
+	    outline: none; 
+    padding: 2px 2px; 
+}
+.textfield2:focus {
+        color:#4dc3ff;
+	background: #edf9ff;
+	width:220px;
+}
+
+.button_blueline {
+	color: #4dc3ff;
+	border: solid 1px #4dc3ff;
+	background: #fff;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+		width: 150px;
+	height: 40px;
+	font-size:14px;
+	margin-left: 10px
+}
+.button_blueline:hover {
+        color: #4dc3ff;
+        border: solid 1px #4dc3ff;
+        background: #edf9ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+			width: 150px;
+	height: 40px;
+	font-size:14px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.button_bluefilled {
+	color: #fff;
+	border: solid 1px #4dc3ff;
+	background: #4dc3ff;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	width: 150px;
+	height: 40px;
+	font-size:14px;
+	margin-left: 10px;
+}
+.button_bluefilled:hover {
+        color: #4dc3ff;
+        border: solid 1px #4dc3ff;
+        background: #edf9ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+			width: 150px;
+	height: 40px;
+	font-size:14px;
+	cursor: pointer;
+}
+.button_bluefilled1 {
+        color: #fff;
+        border: solid 1px #fff;
+        background: #4dc3ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 150px;
+        height: 40px;
+        font-size:14px;
+        margin-left: 10px;
+}
+.button_bluefilled1:hover {
+        color: #4dc3ff;
+        border: solid 1px #fff;
+        background: #edf9ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+                        width: 150px;
+        height: 40px;
+        font-size:14px;
+        cursor: pointer;
+}
+.button_bluefilled2 {
+        color: #fff;
+        border: solid 1px #4dc3ff;
+        background: #4dc3ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 200px;
+        height: 30px;
+        font-size:14px;
+        margin-left: 10px;
+}
+.button_bluefilled2:hover {
+        color: #4dc3ff;
+        border: solid 1px #4dc3ff;
+        background: #edf9ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+                        width: 200px;
+        height: 30px;
+        font-size:14px;
+        cursor: pointer;
+}
+.button_skyblue {
+        color: #fff;
+        border: solid 1px #fff;
+        background: #9edfff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 140px;
+        height: 30px;
+        font-size:14px;
+        margin-top:10px;
+}
+.button_skyblue:hover {
+        color: #fff;
+        border: solid 1px #fff;
+        background: #4dc3ff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        font-size:14px;
+        cursor: pointer;
+}
+.button_pinkwhite {
+        color: #fff;
+        border: solid 1px #fff;
+        background: #ff99b1;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 150px;
+        height: 40px;
+        font-size:14px;
+	margin-top:10px;
+}
+.button_pinkwhite:hover {
+        color: #ff99b1;
+        border: solid 1px #fff;
+        background: #fef5f7;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        font-size:14px;
+        cursor: pointer;
+}
+.button_greenline {
+        color: #b9d94a;
+        border: solid 1px #b9d94a;
+        background: #fff;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 150px;
+        height: 40px;
+        font-size:14px;
+        margin-top:10px;
+}
+.button_greenline:hover {
+        color: #fff;
+        border: solid 1px #b9d94a;
+        background: #b9d94a;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        font-size:14px;
+        cursor: pointer;
+}
+.button_redline {
+	color: #f291a8;
+	border: solid 1px #f291a8;
+	background: #fff;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.button_redline:hover {
+        color: #f291a8;
+        border: solid 1px #f291a8;
+        background: #ffedf1;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+}
+
+.loginradius {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.plusinfo {
+	font-size:9pt;
+}
+.d4d4d4 {
+	color:#e0e0e0;
+	text-decoration: none;
+	}
+
+
+#loginform {
+padding: 10px;
+}
+
+/*	--------------------------------------------------
+	Reveal Modals
+	-------------------------------------------------- */
+		
+	.reveal-modal-bg { 
+		position: fixed; 
+		height: 100%;
+		width: 100%;
+		background: #000;
+		background: rgba(0,0,0,.8);
+		background-size: cover;
+		z-index: 15;
+		display: none;
+		top: 0;
+		left: 0; 
+		}
+	
+	.reveal-modal {
+		visibility: hidden;
+		top: 100px;
+		left: 50%;
+		margin-left: -300px;
+		width: 520px;
+		background: #fff url(modal-gloss.png) no-repeat -200px -80px;
+		position: fixed;
+		z-index: 20;
+		padding: 30px 40px 34px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		-moz-box-shadow: 0 0 10px rgba(0,0,0,.4);
+		-webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
+		-box-shadow: 0 0 10px rgba(0,0,0,.4);
+		}
+		
+	.reveal-modal.small 		{ width: 200px; margin-left: -140px;}
+	.reveal-modal.medium 		{ width: 400px; margin-left: -240px;}
+	.reveal-modal.large 		{ width: 600px; margin-left: -340px;}
+	.reveal-modal.xlarge 		{ width: 800px; margin-left: -440px;}
+	
+	.reveal-modal .close-reveal-modal {
+		font-size: 22px;
+		line-height: .5;
+		position: absolute;
+		top: 8px;
+		right: 11px;
+		color: #aaa;
+		text-shadow: 0 -1px 1px rbga(0,0,0,.6);
+		font-weight: bold;
+		cursor: pointer;
+		} 
+	/*
+		
+	NOTES
+	
+	Close button entity is &#215;
+	
+	Example markup
+	
+	<div id="myModal" class="reveal-modal">
+		<h2>Awesome. I have it.</h2>
+		<p class="lead">Your couch.  I it's mine.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultrices aliquet placerat. Duis pulvinar orci et nisi euismod vitae tempus lorem consectetur. Duis at magna quis turpis mattis venenatis eget id diam. </p>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	
+	*/
+

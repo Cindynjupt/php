@@ -1,0 +1,179 @@
+@-webkit-keyframes fly {
+  from {
+    transform: translateY(440px); }
+  to {
+    transform: translateY(-360px); } }
+@-webkit-keyframes swing {
+  from {
+    transform: rotate(-15deg) scale(1, 1); }
+  to {
+    transform: rotate(15deg) scale(1.1, 1.1); } }
+@-moz-keyframes fly {
+  from {
+    transform: translateY(440px); }
+  to {
+    transform: translateY(-360px); } }
+@-moz-keyframes swing {
+  from {
+    transform: rotate(-15deg) scale(1, 1); }
+  to {
+    transform: rotate(15deg) scale(1.1, 1.1); } }
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  font: 15px/1.5 helvetica, arial, sans-serif;
+  color: white;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility; }
+
+.container {
+  padding: 0 10px;
+  overflow: hidden;
+  margin: 0 auto; }
+  @media screen and (min-width: 500px) {
+    .container {
+      max-width: 1280px; } }
+
+.header {
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 0; }
+  .header img {
+    display: block; }
+
+.section {
+  padding: 30px 0 0 0;
+  text-align: center; }
+  .section h2 {
+    margin: 0 0 5px 0;
+    font-size: 130%; }
+  .section p {
+    margin: 0 0 10px 0;
+    color: #d6e5f5; }
+  @media screen and (min-width: 520px) {
+    .section {
+      float: left;
+      overflow: hidden;
+      width: 33.3333%; } }
+
+.hero {
+  background: #1d4c7c url(/resources/images/landing_page/background.png) center left no-repeat;
+  background-size: cover;
+  padding: 10px 0 40px 0; }
+  .hero .rocket {
+    display: none; }
+    @media screen and (min-width: 520px) {
+      .hero .rocket {
+        display: block;
+        width: 33px;
+        height: 69px;
+        position: absolute;
+        top: 200px;
+        left: 100px;
+        background: url(/resources/images/landing_page/rocket.png) top left no-repeat;
+        -webkit-animation: fly 10s ease-in-out infinite;
+        -moz-animation: fly 10s ease-in-out infinite; } }
+  .hero .planet {
+    display: none; }
+    @media screen and (min-width: 520px) {
+      .hero .planet {
+        display: block;
+        width: 64px;
+        height: 48px;
+        position: absolute;
+        top: 100px;
+        right: 100px;
+        background: url(/resources/images/landing_page/planet.png) top left no-repeat;
+        transform: rotate(-15deg);
+        -webkit-animation: swing 3s ease-in-out infinite alternate;
+        -moz-animation: swing 3s ease-in-out infinite alternate; } }
+  @media screen and (min-width: 520px) {
+    .hero {
+      width: 100%;
+      padding: 0;
+      background-image: url(/resources/images/landing_page/background_big.png); }
+      .hero .container {
+        position: relative;
+        height: 600px; } }
+
+.section2 {
+  background: #2765a5;
+  border-bottom: 1px solid #2765a5; }
+
+.section3 {
+  background: #307fcf;
+  border-bottom: 1px solid #307fcf; }
+
+.section4 {
+  background: #5a98d8;
+  border-bottom: 1px solid #5a98d8; }
+
+@media screen and (min-width: 500px) {
+  .section5 {
+    display: none; } }
+
+h1 {
+  width: 166px;
+  height: 51px;
+  background: url(/resources/images/landing_page/slogan.png) top left no-repeat;
+  text-indent: -999em;
+  background-size: cover;
+  margin: 30px auto 30px auto; }
+  @media screen and (min-width: 520px) {
+    h1 {
+      width: 346px;
+      height: 108px;
+      margin: 60px auto 80px auto;
+      background-image: url(/resources/images/landing_page/slogan_big.png); } }
+
+.phone {
+  width: 129px;
+  height: 200px;
+  background: url(/resources/images/landing_page/phone.png) center top no-repeat;
+  background-size: cover;
+  position: relative;
+  left: 50%;
+  margin-left: -65px;
+  overflow: hidden; }
+  .phone img {
+    position: absolute;
+    top: 40px;
+    left: 12px; }
+
+.download {
+  background: #4dc3ff;
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+  width: 200px; }
+  .download:hover {
+    background: #1ab2ff; }
+  @media screen and (min-width: 520px) {
+    .download {
+      width: 400px;
+      font-size: 200%; } }
+
+.footer {
+  color: #999;
+  background: white;
+  padding: 30px 0;
+  text-align: center;
+  clear: both; }
+  .footer a {
+    color: #4dc3ff; }
+  .footer .more {
+    display: none; }
+    @media screen and (min-width: 500px) {
+      .footer .more {
+        display: block; } }
+
+/*# sourceMappingURL=landing-page.css.map */

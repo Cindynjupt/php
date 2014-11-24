@@ -1,0 +1,176 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font: 13px helvetica, arial, sans-serif;
+  background: #f0f0f0;
+  color: #444;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: #4dc3ff;
+  text-decoration: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.text-muted {
+  color: #999;
+}
+
+.section-header {
+  padding: 7px 15px;
+  color: #999;
+}
+
+.header {
+  height: 180px;
+  padding: 15px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  position: relative;
+}
+
+.header span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  background: radial-gradient(ellipse at center, rgba(100,100,100,0.5) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.header h1 {
+  font-size: 17px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 300px;
+}
+
+.organizer {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 300px;
+  font-size: 13px;
+}
+
+.organizer p {
+  margin-top: 4px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.avatar.avatar-large {
+  width: 44px;
+  height: 44px;
+  margin-right: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.description {
+  background: white;
+  padding: 15px;
+  line-height: 1.4;
+}
+
+.time-location {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+}
+
+.time-location > p {
+  padding: 3px 15px;
+}
+
+.time-location > div:first-child {
+  border-right: 1px solid #f0f0f0;
+}
+
+.time-location label {
+  font-size: 11px;
+  color: #ccc;
+}
+
+.participants {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.participants li {
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px;
+}
+
+.album {
+  background: white;
+  list-style: none;
+  padding: 15px 15px 5px 15px;
+}
+
+.album img {
+  display: block;
+  width: 61.25px;
+  height: 61.25px;
+  border-radius: 4px;
+}
+
+.album li {
+  float: left;
+  margin: 0 15px 15px 0;
+}
+
+.album li:nth-child(4n) {
+  margin-right: 0;
+}
+
+.download {
+  text-align: center;
+  margin-top: 30px;
+  padding-bottom: 50px;
+}
+
+.download a {
+  font-size: 110%;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  width: 280px;
+  border-radius: 6px;
+  background-color: #4dc3ff;
+  padding: 15px 0;
+  margin: 15px auto;
+  color: white;
+}

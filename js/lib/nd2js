@@ -1,0 +1,741 @@
+
+var ND = ND || {};
+
+
+
+//it's a class '
+ND.Dialog = function(base, config) {
+    var self = this;
+    var base = $(base);
+    
+    self.set_modal = function () {
+    	if($('#dark_overlay').length>0) {
+    		$('#dark_overlay').detach();
+    	}
+    	self.overlay.appendTo('body').show();
+    }
+    
+    self.abolish_modal = function () {
+    	self.overlay.detach();
+    }
+    
+    self.centering = function() {
+        base.css('top',  ( $(window).height() - base.outerHeight() )/2 );
+        base.css('left', ( $(window).width()  - base.outerWidth()  )/2 );
+    }
+    self.get_data = function() {
+        return base.find('form').serialize();
+    }
+    self.close = function(){
+    	self.abolish_modal();
+    	window.__dialog = null;
+    	base.remove();
+    	$('body').unbind('keydown.dialog_esc_event'); 
+    }
+    
+    self.init = function() {
+    	var default_config = {
+	    	modal : false,
+	    	centering: true
+	    };
+	    self.config = $.extend(default_config, config);
+	    self.overlay = $('<div id="dark_overlay"></div>');
+	    //for just one dialog...
+	    if(window.__dialog) {
+	    	window.__dialog.close();
+	    }
+	    window.__dialog = self;
+	    
+	    if(self.config.modal==true) {
+	    	self.set_modal();
+	    }
+	    
+    	self.bt_close = base.find('.bt.bt_close');
+    	self.bt_close.click(self.close);
+    	base.appendTo('body');
+    	base.show();
+    	self.centering();
+    	
+    	$(window).resize(function() {
+	        base.centering();
+	    });
+		$('body').bind("keydown.dialog_esc_event", function(e){
+	    	if(e.keyCode == 27){
+	    		self.close();
+	    	}
+    	});
+    	
+    	self.find = function (param) {
+    		return base.find(param);
+    	}
+    	base.find('input, select, textarea').placeholder();
+    }
+    self.init();
+    
+    return self;
+}
+
+ND.Api = function(base_url) {
+    var self = this;
+    this.base_url = base_url;
+    
+    this._name_dialog_map = {
+        'select_late': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            dialog.find('.bt.bt_ok').click(function() {
+                params.mode = 'late';
+                var res = self.call('api/card_select', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    alert('캔디를 사용하여 카드를 선택했습니다.');
+                    location.href = base_url + '/cards/' + params.idx;
+                }
+            });
+            return dialog;
+        },
+        'select_more': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            dialog.find('.bt.bt_ok').click(function() {
+                params.mode = 'more';
+                var res = self.call('api/card_select', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    alert('캔디를 사용하여 카드를 선택했습니다.');
+                    location.href = base_url + '/cards/' + params.idx;                    
+                }
+            });
+            return dialog;
+        },
+        'interest': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            var textarea = dialog.find('[name=message]'); 
+            textarea.keydown(function(){
+            	message_limit(this, 100);
+            })
+            dialog.find('.bt.bt_ok').click(function() {
+            	if(message_limit(textarea, 100)){
+	                params.message = dialog.find('textarea[name=message]').val();
+	                var res = self.call('api/card_interest', params, callback );
+	                if( res.status && res.status == 'success' ) {
+	                    alert('관심표현을 보냈습니다.'); // TODO : 좀 좋은 말로..
+	                    location.reload(true);
+	                }
+	           	}
+            });
+            return dialog;
+        },
+        'interest_late': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            var textarea = dialog.find('[name=message]'); 
+            textarea.keydown(function(){
+            	message_limit(this, 100);
+            })
+            dialog.find('.bt.bt_ok').click(function() {
+            	if(message_limit(textarea, 100)){
+	                params.mode = 'late';
+	                params.message   = dialog.find('textarea[name=message]').val();
+	                var res = self.call('api/card_interest', params, callback );
+	                if( res.status && res.status == 'success' ) {
+	                    location.reload(true);
+	                }
+	            }
+            });
+            return dialog;
+        },
+        'interest_back': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            params.mode = 'back';
+            dialog.find('.bt.bt_ok').click(function() {
+                var res = self.call('api/card_interest', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    location.reload(true);
+                }
+            });
+            return dialog;
+        },
+        'user_impression': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            
+            dialog.find('.reverse_matching_info_btn').click(function() {
+            	var res = self.call('api/reverse_matching_info',params);
+                if( res.status && res.status == 'success' ) {
+                	dialog.find('.reverse_matching_info_btn').hide();
+                	dialog.find('.reverse_matching_info_text').text(res.data.reverse_matching_info + '%').show();
+                }
+            });
+            
+            dialog.find('.card_popularity_btn').click(function() {
+            	var res = self.call('api/card_popularity',params);
+                if( res.status && res.status == 'success' ) {
+                	dialog.find('.card_popularity_btn').hide();
+                	dialog.find('.card_popularity_text').text(res.data.popularity + '%').show();
+                }
+            });
+            
+            dialog.find('.bt.bt_ok').click(function() {
+                // 이거 좀 바보 같은데-_-);
+                var form = dialog.find('form');
+                // serializeArray
+                $.each( form.find('[name^=impression]'), function(i, e) {
+                    var name  = $(e).attr('name');
+                    var value = $(e).val();
+                    params[name] = value; 
+                });
+                
+                var res = self.call('api/user_impression', params, callback);
+                if( res.status && res.status == 'success' ) {
+                    dialog.close();
+                    location.reload(true);
+                    return;
+                }
+            });
+            return dialog;
+        },
+        'delete': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            dialog.find('.bt.bt_ok').click(function() {
+            	if(dialog.find('input[name=reason]:checked').length==0) {
+            		alert('항목을 선택해주세요');
+            		return;
+            	}
+            	params['reason'] = dialog.find('input[name=reason]:checked').val();
+                var res = self.call('api/card_delete', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    alert('카드를 삭제했습니다.');
+                    dialog.close();
+                    location.href = base_url +  '/cards/all';        
+                }
+            });
+            return dialog;
+        },
+        'report': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            dialog.find('.bt.bt_ok').click(function() {
+            	if(dialog.find('input[name=reason]:checked').length==0) {
+            		alert('항목을 선택해주세요');
+            		return;
+            	}
+                params['reason'] = dialog.find('input[name=reason]:checked').val();
+                params['text']   = dialog.find('textarea[name=text]').val();
+                var res = self.call('api/report', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    alert('해당 유저의 신고가 접수되었습니다.');
+                    dialog.close();
+                    return;
+                }
+            });
+            return dialog;
+        },
+        'chat_open': function(base, params, callback) {
+        	var user_idx = params.idx;
+            var dialog = ND.Dialog(base);
+            dialog.find('.bt.bt_ok').click(function() {
+                var res = self.call('api/chat_open', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    dialog.close();
+                    location.replace(self.base_url + "/friends/open_chat#idx=" + user_idx);
+                }
+            });
+            return dialog;
+        },
+        'findpass': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            var input = dialog.find('input[name=id]');
+            
+            function reset_pass() {
+                var val = input.val();
+                params.id = val;
+                var res = self.call('account/reset_password', params, callback );
+                if( res.status && res.status == 'success' ) {
+                    alert('새 비밀번호를 메일로 보내드렸습니다.');
+                    dialog.close();
+                }
+            }
+            
+            dialog.find('.bt.bt_ok').click(function() { reset_pass(); });
+            input.keydown( function(e) {
+                if( e.keyCode == 13 ) {
+                    reset_pass();
+                }
+            });
+            return dialog;
+        },
+        'verify_realname': function(base, params, callback) {
+            var dialog = ND.Dialog(base);
+            var res = self.call('api/verify_realname');
+            
+            dialog.find('.bt.bt_ok').click(function() {
+                if( res.status && res.status == 'success' ) {
+                    if( res.data ) {
+                        alert('실명이 확인되었습니다.');
+                        location.reload(true);
+                    } else {
+                        alert('실명 여부를 확인할 수 없습니다.');
+                    }
+                }
+            });
+            return dialog;
+        },
+        'login': function(base, params, callback) {
+            var dialog = ND.Dialog(base, {modal: true});
+            var form = dialog.find("#login_form");
+            var email_form = dialog.find('.findpass input[name=email]');
+            dialog.find(".bt_find_pass").click(function(){
+			        var pane = dialog.find('.pane.findpass');
+			        var inner = pane.find('.inner');
+			        if(pane.is(':visible')) {
+			            pane.slideUp(500);
+			        } else {
+			            pane.slideDown(500);
+			            $('.findpass input[name=email]').focus();
+			        }
+            })
+            
+            dialog.find('.login_bt').click(function(){
+            	form.submit();
+            });
+            
+            dialog.find('input[name=password]').keydown( function(e) {
+	            if( e.keyCode == 13 ) {
+	                form.submit();
+	            }
+	        });
+	        
+            dialog.find('input[name=email]').keydown( function(e) {
+	            if( e.keyCode == 13 ) {
+	                findpass();
+	            }
+	        });
+	        
+	        
+            dialog.find(".bt.bt_find_pass_act").click(findpass);
+            dialog.find("input[name=id]").focus();
+			function findpass(){
+		        var email = email_form.val();
+            	params.id = email;
+            	var res = self.call('account/reset_password', params, callback );
+            	if(res.status && res.status=='success') {
+                    alert('입력한 주소로 새 비밀번호를 발급해드렸습니다.');
+                    dialog.close();
+                }
+           	}	
+             
+            return dialog;
+        },
+        
+        'register': function(base, params, callback) {
+            var dialog = ND.Dialog(base, {modal: true});
+            return dialog;
+        },
+        
+        'show_more_photo': function(base, params, callback) {
+            var dialog = ND.Dialog(base, {modal: false});
+      	    dialog.find(".bt.bt_ok").click(function() {
+            	var res = self.call('api/show_more_photo', params, callback );
+            	if(res.status && res.status=='success') {
+                    //alert('사진 더 보기를 수행하셨습니다.');
+                    location.href = location.href; 
+                } 
+             });
+             
+            return dialog;
+            
+        },
+        'my_impression' : function(base, params, callback) {
+        	var dialog = ND.Dialog(base);
+			dialog.find('.bt.bt_ok').click(function() {
+				res = self.call('api/my_impression', {});
+				if(res.status=='success') {
+					callback(res);				
+					dialog.close();	
+				}else {
+					alert(res.message);
+					dialog.close();
+				}
+			});
+			return dialog;
+				
+        },
+        'high_likability_to_me' : function(base, params, callback) {
+        	var dialog = ND.Dialog(base);
+			dialog.find('.bt.bt_ok').click(function() {
+				res = self.call('api/high_likability_to_me', params);
+				if(res.status=='success') {
+					callback(res.data);				
+					dialog.close();	
+				}
+			});
+			return dialog;
+        },
+        
+        'change_pass': function(base, params, callback) {
+        	var dialog = ND.Dialog(base, {modal: true});
+        	dialog.find(".bt.bt_ok").click(function() {
+        		var input = dialog.find("form.change_pass").serialize();
+        		var res = self.call('api/check_password', input, callback );
+        		if(res.status && res.status=='success') {
+                } else {
+                    alert(res.message);
+                    return ;
+                } 
+        		if(dialog.find('[name=old_pass]').val().length == 0) {
+        			alert('현재 비밀번호를 입력하세요.');
+        			return ;
+        		}
+        		if(dialog.find('[name=new_pass]').val().length < 6) {
+        			alert('비밀번호를 6글자 이상 입력해주세요.');
+        			return ;
+        		}
+        		if(dialog.find('[name=new_pass]').val() != dialog.find('[name=new_pass_verify]').val()) {
+        			alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        			return ;
+        		}
+            	var res = self.call('api/change_password', input, callback );
+            	if(res.status && res.status=='success') {
+                    alert("비밀번호를 성공적으로 변경하였습니다..");
+                    dialog.close();
+                }
+             });
+             
+            return dialog;
+        },
+        
+        'unregister': function(base, params, callback) {
+        	var dialog = ND.Dialog(base, {modal: true});
+        	dialog.find(".bt.bt_ok").click(function() {
+        		if(confirm("정말 탈퇴하시겠습니까?")) {
+	        		input = dialog.find("form").serialize();
+	            	var res = self.call('api/unregister', input, callback );
+	            	if(res.status && res.status=='success') {
+	                    alert("탈퇴에 성공하셨습니다.");
+	                    dialog.close();
+	                    location.href = "http://noondate.com/v2";
+	                }
+        		}
+             });
+             
+            return dialog;
+        },
+        'popup': function(base, params, callback) {
+        	var dialog = ND.Dialog(base, {modal: true});
+            return dialog;
+        },  
+        'service_introduction': function(base, params, callback) {
+        	var dialog = ND.Dialog(base, {modal: true});
+            return dialog;
+        },  
+        'device': function(base, params, callback) {
+        	var dialog = ND.Dialog(base, {modal: true});
+            return dialog;
+        }  
+    }
+}
+
+
+ND.Api.prototype.dialog = function(name, params, callback) {
+    if( !params ) {
+        var params = {};
+    }
+    var body = $('body');
+    
+    var Maker = this._name_dialog_map[name];
+    if( !Maker ) {
+        alert('해당 다이얼로그를 찾을 수 없습니다.')
+        return;
+    }
+    // TODO : 이거 컨텐츠 내용.. 그냥 웹에서 가져오지 말고 template만들어서 하는게 나을듯 한데..
+    if (params['url']) {
+    	var url = params['url'];
+    } else {
+    	var url = this.base_url + '/dialogs/'+name;
+    }
+    if (params['type']) {
+    	var type = params['type'];
+    } else {
+    	var type = 'post';
+    }
+    $.ajax({
+        type: type,
+        data: params,
+        url: url,
+        success: function(res) {
+            // TODO : validation..
+            var dialog = Maker(res, params, callback);
+            if(!dialog.find('div.dialog')) {
+                alert( '다이얼로그를 불러오는데 실패했습니다. 잠시 후 다시 이용해 주십시오. 문제가 계속되면 고객센터로 연락 바랍니다.' );
+                return false;
+            }
+        }
+    });
+}
+
+
+ND.Api.prototype.call = function(endpoint, params, callback, error_alert) {
+	if (!error_alert) {
+		error_alert = false;
+	} else {
+		error_alert = true;
+	}
+    try {
+        var res;
+        $.ajax({
+            type: 'post',
+            url: this.base_url + '/' + endpoint,
+            data: params,
+            async: false,
+            success: function(resp) {
+                res = resp;
+            },
+            dataType: 'json'
+        });
+        
+        if( res.status && res.status =='success' ) {
+            if( callback ) {
+                callback(res);
+            }
+        } else if( res.status && res.status =='error' && res.message) {
+        	alert(res.message);
+        }
+        return res;
+    } catch(error) {
+    	alert('알 수 없는 에러가 발생하였습니다. 문제가 계속되면 고객센터로 문의 바랍니다.');
+    }
+}
+
+
+var Notibar = function(base, url) {
+	var INTERVAL_TIME = 60000;
+	var INF_SCROLL_TRIGGER = 10;
+	var self = this;
+	
+	var base_item = $('<div><div class="item ${identifier} {{if !is_read }}unread{{/if}}" data-idx="${idx}"><a><div class="icon"></div><div class="text">${text}</div><div class="time">${time}</div></a></div></div>');
+	
+	self.url = url;
+	self.count = 0;
+	self.opened = false;
+	self.is_loading = false;
+	self.have_loaded = false;
+	
+	self.base = $(base);
+	self.loading = $('<div class="loading"><img src="http://noondate.com/res/images/loading.gif" /></div>');
+	self.counter = self.base.find('.counter');
+	self.container = self.base.find('.container');
+	self.viewport = self.base.find('.viewport');
+	self.contents = self.base.find('.contents');
+	
+	self.init = function() {
+		self.base.click(self.toggle_popup);
+		self.container.click(function(e) { e.stopPropagation(); });
+		self.base.bind('mousewheel DOMMouseScroll', self.extend_contents);
+		setInterval(self.pull, INTERVAL_TIME);
+		self.update_counter();
+	}
+	self.update_counter = function() {
+		$.ajax({
+			url: 'http://noondate.com/v2/api/notification_unread_count',
+			dataType: 'json',
+			success: function(resp) {
+				if(resp.status && resp.status=='success') {
+					self.counter.text(resp.data);
+					if(resp.data > 0) {
+						self.counter.show();
+					} else {
+						self.counter.hide();
+					}
+				}
+			}
+		});
+	}
+	self.flush_counter = function() {
+		$.ajax({
+			url: 'http://noondate.com/v2/api/notification_flush',
+			dataType: 'json',
+			success: function(resp) {
+			}
+		});
+	}
+	self.extend_contents = function() {
+		var contents_height = self.contents.height();
+		var viewport_height = self.viewport.height();
+		var position = self.viewport.position().top;
+		var remain = contents_height - viewport_height + position;
+		if(remain < INF_SCROLL_TRIGGER) {
+			self.load_items();
+		}
+	}
+	self.pull = function() {
+		// TODO :
+	}
+	self.load_items = function() {
+		if(self.is_loading) {
+			return;
+		}
+		self.is_loading = true;
+		self._show_loading();
+		
+		var data = {};
+		var last_idx = self.contents.find('.item').last().data('idx');
+		if(last_idx) {
+			data.last_idx = last_idx;
+		}
+		$.ajax({
+			url: 'http://noondate.com/v2/api/notifications',
+			data: data,
+			dataType: 'json',
+			success: function(resp) {
+				if(!resp.status || resp.status != 'success') {
+					self._hide_loading();
+					return;
+				}
+				
+				if(resp.data.length < 1) {
+					self._hide_loading();
+					if(self.have_loaded) {
+						var no_more = $('<div class="no-more">더 이상 알림이 없습니다.</div>');
+						self.contents.append(no_more);
+					}
+					return;
+				}
+				
+				$(resp.data).each(function(i, e) {
+					var row = base_item.tmpl(e);
+					var disabled_in_web = ['survey', 'gifticon', 'story_update', 'story_like'];
+					
+					if($.inArray(row.identifier, disabled_in_web)) {
+						return true;
+					}
+					
+					if(e.photo) {
+						var img = $('<img src="" />');
+						img.attr('src', 'http://noondate.com/image/' + e.photo);
+						row.find('.icon').append(img);
+					}
+					if(e.link) {
+						var a = row.find('a');
+						a.attr('href', e.link);
+					}
+					self.contents.append(row);
+				});
+				
+				self.container.tinyscrollbar_update('relative');
+				
+				self.have_loaded = true;
+				self.is_loading = false;
+				self._hide_loading();
+			}
+		});
+	}
+	self._show_loading = function() {
+		self._hide_loading();
+		self.contents.append(self.loading);
+	}
+	self._hide_loading = function() {
+		self.loading.detach();
+	}
+	self.clear = function() {
+		self.count = 0;
+	}
+	self.toggle_popup = function() {
+		if(self.opened) {
+			self.close();
+		} else {
+			self.open();
+		}
+	}
+	self.open = function() {
+		self.container.show();
+		self.flush_counter();
+		self.update_counter();
+		self.opened = true;
+		if(!self.have_loaded) {
+			self.container.tinyscrollbar();
+			self.load_items();
+		}
+	}
+	self.close = function() {
+		self.container.hide();
+		self.opened = false;
+	}
+	self.init();
+}
+
+
+function StyleSelectChecker(target) {
+    var self = this;
+    var base = $(target);
+    var inputs = base.find('input');
+    
+    base.click( function() { self.update(); } );
+    
+    this.update = function() {
+        var checked = base.find('input:checked');
+        if( checked.length >= 3 ) {
+            self.disable();
+        } else {
+            self.enable();
+        }
+    }
+    this.disable = function() {
+        base.find('input:not(:checked)').attr('disabled', true);
+    }
+    this.enable = function() {
+        inputs.attr('disabled', false);
+    }
+    this.update();
+}
+
+
+function centering(target) {
+    target.css('top',  ( $(window).height() - target.outerHeight() )/2 );
+    target.css('left', ( $(window).width()  - target.outerWidth()  )/2 );        
+}
+
+
+function message_limit(e, limit) {
+	/*
+     var input = $(e);
+     var val = input.val();
+     if(val.length >= limit) {
+     	 msg = '메세지는 %s자 이하로 써주세요.';
+     	 msg = msg.replace("%s",limit);
+         alert(msg);
+         input.val( val.slice(0, limit-1) );
+         return false;
+     }
+	 */
+     return true;
+}    
+
+function Popup() {
+	var self = this;
+	
+	self.open = function () {
+		var res;
+		$.ajax({
+			type: 'post',
+			url: "http://noondate.com/v2/api/active_popup",
+			dataType: 'json',
+			async: false,
+			success: function(resp) {
+				res = resp;
+			}
+		});
+		
+		if(res.status && res.status =='success') {
+			var dialog = window.api.dialog('popup',{url : res.data.url, type : 'get'});
+			return;
+		}
+	}
+	
+	self.open();
+}
+
+
+function init() {
+	window.api = new ND.Api('http://noondate.com/v2');
+	//window.notibar = new Notibar('#notification');
+	//window.popup = new Popup();
+}
+$(document).ready(init);
+
+
+//console.log for ie
+if (typeof console == "undefined") var console = { log: function() {} }; 
